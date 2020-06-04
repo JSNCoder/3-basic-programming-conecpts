@@ -5,7 +5,7 @@ const readlineInterface = require('readline').createInterface({
 
 readCardNumber()
 
-function readCardNumber () { readlineInterface.question(`这是一个 MASTERCARD/VISA CARD 信用卡号验证器\n 请输入您的卡号（或输入end以结束程式）： `, (cardNumber) => {
+function readCardNumber () { readlineInterface.question(`MASTERCARD/VISA CARD 信用卡号验证器\n 请输入您的卡号（或输入end以结束程式）： `, (cardNumber) => {
   if(cardNumber === "end") {
     console.log("结束程式")
   } else {
