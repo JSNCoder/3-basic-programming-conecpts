@@ -1,13 +1,29 @@
-
-const readline = require('readline').createInterface({
+const readlineInterface = require('readline').createInterface({
   input: process.stdin,
   output: process.stdout
 })
 
-readline.question(`请输入您的卡号: `, (cardNumber) => {
+readCardNumber()
+
+function readCardNumber () { readlineInterface.question(`这是一个 MASTERCARD/VISA CARD 信用卡号验证器\n 请输入您的卡号（或输入end以结束程式）： `, (cardNumber) => {
+  if(cardNumber === "end") {
+    console.log("结束程式")
+  } else {
     cardValidator(cardNumber)
-    readline.close()
+    console.log("-------------------------------------------------------------")
+  }
+  ifThen(cardNumber) 
 })
+}
+
+function ifThen (cardNumber){
+if(cardNumber !== "end"){
+  readCardNumber()
+} else {
+  readlineInterface.close()
+}
+}
+
 //------------------------------------------------------------------------------
 
 function cardValidator (cardNumber) {
@@ -15,7 +31,7 @@ function cardValidator (cardNumber) {
 
   // 判断卡号长度
   if (cardNumberStr.length !== 16) {
-    return console.log(`卡号长度不符`)
+    return console.log(`非 MASTER 或 VISA 卡号长度`)
   } else {
     return console.log(checkIssuer(cardNumberStr))
   }
@@ -26,16 +42,16 @@ function cardValidator (cardNumber) {
       if(checkNum(cardNumberStr)) {
         return `合法的 Master Card`
       } else {
-        return `卡号错误`
+        return `卡号未通过验证`
       }
     } else if (Number(cardNumberStr[0]) === 4) {
       if(checkNum(cardNumberStr)){
         return `合法的 VISA Card`
       } else {
-        return `卡号错误`
+        return `卡号未通过验证`
       }
     } else {
-      return `发行者错误`
+      return `发行者非 MASTER 或 VISA`
     }
   }
 

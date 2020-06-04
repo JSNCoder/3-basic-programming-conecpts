@@ -1,15 +1,16 @@
+
+
+
 function cardValidator (cardNumber) {
   cardNumberStr = cardNumber.toString()
 
   // 判断卡号长度
   if (cardNumberStr.length !== 16) {
-    document.getElementById('result').innerHTML = "NG"
-    return console.log(`卡号长度不符`)
+    document.getElementById('result').innerHTML = `非 MASTER 或 VISA 卡号长度`
+    return // console.log(`非 MASTER 或 VISA 卡号长度`)
   } else {
-    document.getElementById('result').innerHTML = checkIssuer(cardNumberStr).toString()
-    let showResult = checkIssuer(cardNumberStr)
-    console.log(showResult)
-    console.log(checkIssuer(cardNumberStr))
+    document.getElementById('result').innerHTML = checkIssuer(cardNumberStr)
+    return // console.log(checkIssuer(cardNumberStr))
   }
 
   // 判断发行者
@@ -18,16 +19,16 @@ function cardValidator (cardNumber) {
       if(checkNum(cardNumberStr)) {
         return `合法的 Master Card`
       } else {
-        return `卡号错误`
+        return `卡号未通过验证`
       }
     } else if (Number(cardNumberStr[0]) === 4) {
       if(checkNum(cardNumberStr)){
         return `合法的 VISA Card`
       } else {
-        return `卡号错误`
+        return `卡号未通过验证`
       }
     } else {
-      return `发行者错误`
+      return `发行者非 MASTER 或 VISA`
     }
   }
 
